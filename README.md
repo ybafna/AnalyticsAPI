@@ -1,5 +1,11 @@
 # AnalyticsAPI
 
+This is a backend service written using dotnet 5.0 and Entity Framework to perform some analytics on user actions.<br>
+Following use cases are covered:<br>
+1) Find which action was taken most frequently among all actions and what was the frequency of that action per user.<br>
+2) Save the action taken by the user.<br>
+
+### SETUP <br>
 Install dotnet 5.0(https://dotnet.microsoft.com/en-us/download/dotnet/5.0)<br>
 
 Clone this repository.<br>
