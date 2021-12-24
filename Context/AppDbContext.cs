@@ -14,6 +14,5 @@ namespace AnalyticsAPI.Context
 
         public DbSet<User> Users { get; set; }
         public DbSet<Event> Events { get; set; }
-        public DbSet<UserEventInteraction> Interactions { get; set; }
     }
 }

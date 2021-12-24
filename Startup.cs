@@ -35,7 +35,7 @@ namespace AnalyticsAPI
                 options.UseSqlite(Configuration.GetConnectionString("DBConnection")));
             services.AddScoped<IEventRepository, EventRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IInteractionRepository, InteractionRepository>();
+            // services.AddScoped<IInteractionRepository, InteractionRepository>();
             services.AddScoped<IEventService, EventService>();
 
             services.AddControllers();
