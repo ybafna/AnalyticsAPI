@@ -15,6 +15,7 @@ namespace AnalyticsAPI.Repositories
             this.appDbContext = appDbContext;
         }
 
+        //Adds a new user to DB Context
         public int AddUser(User User)
         {
             var result = appDbContext.Users.Add(User);
@@ -22,6 +23,8 @@ namespace AnalyticsAPI.Repositories
             return User.UserId;
         }
 
+
+        //Fetches the user from DB using user id
         public User GetUser(int UserId)
         {
             var result = appDbContext.Users.FirstOrDefault(u => u.UserId == UserId);
