@@ -27,8 +27,8 @@ namespace AnalyticsAPI.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(GenericResponse<ActionResponse>))]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(GenericResponse<Object>))]
         public IActionResult GetMostFrequentAction()
         {
             GenericResponse<ActionResponse> response = null;
@@ -48,7 +48,7 @@ namespace AnalyticsAPI.Controllers
         [HttpPost]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(GenericResponse<Object>))]
         public IActionResult AddEventLog(ActionRequest request)
         {
             if (request == null)

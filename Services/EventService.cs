@@ -52,7 +52,7 @@ namespace AnalyticsAPI.Services
                 if (mostFrequentAction != null)
                 {
                     List<ActionFrequencyPerUser> actionFrequencies = eventRepository.GetMostFrequentActionPerUser(mostFrequentAction.ActionWithMaxFrequency);
-                    actionResponse.frequenciesPerUser = actionFrequencies;
+                    actionResponse.frequencyPerUser = actionFrequencies;
                     actionResponse.ActionWithMaxFrequency = mostFrequentAction.ActionWithMaxFrequency;
                     actionResponse.MaxFrequency = mostFrequentAction.MaxFrequency;
                     response.Data = actionResponse;

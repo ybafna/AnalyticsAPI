@@ -8,10 +8,9 @@ namespace AnalyticsAPI.Models
     [Serializable()]
     public class ActionResponse
     {
-        public EventType ActionWithMaxFrequency { get; set; }
         public int MaxFrequency { get; set; }
-
-        public List<ActionFrequencyPerUser> frequenciesPerUser { get; set; }
+        public EventType ActionWithMaxFrequency { get; set; }
+        public List<ActionFrequencyPerUser> frequencyPerUser { get; set; }
 
     }
 }
