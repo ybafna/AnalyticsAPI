@@ -16,4 +16,4 @@ After successful installation, run the following commands to initialize the data
 Use "dotnet run" command to host the application on https://localhost:5001
 
 The server should be up and running.
-Api documentation can be found at: https://www.localhost.com:5001/swagger/index.html
+Api documentation can be found at: https://localhost:5001/swagger/index.html
