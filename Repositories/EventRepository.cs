@@ -12,9 +12,9 @@ namespace AnalyticsAPI.Repositories
     {
         private readonly AppDbContext appDbContext;
 
-        public EventRepository(AppDbContext _appDbContext)
+        public EventRepository(AppDbContext appDbContext)
         {
-            this.appDbContext = _appDbContext;
+            this.appDbContext = appDbContext;
         }
 
         public Event AddEvent(Event Event, int UserId)
@@ -28,30 +28,23 @@ namespace AnalyticsAPI.Repositories
 
         public MostFrequentActionResponse GetMostFrequentAction()
         {
-            var result = appDbContext.Events.GroupBy(e => e.EventType)
+            MostFrequentActionResponse response = appDbContext.Events.GroupBy(e => e.EventType)
                         .Select(e => new { EventType = e.Key, Count = e.Count() })
                         .OrderByDescending(x => x.Count)
+                        .Select(e => new MostFrequentActionResponse(e.EventType, e.Count))
                         .FirstOrDefault();
 
-            MostFrequentActionResponse Response = null;
-
-            if (result != null)
-            {
-                Response = new MostFrequentActionResponse();
-                Response.MaxFrequency = result.Count;
-                Response.ActionWithMaxFrequency = result.EventType;
-            }
-            return Response;
+            return response;
         }
         public List<ActionFrequencyPerUser> GetMostFrequentActionPerUser(EventType EventType)
         {
-            List<ActionFrequencyPerUser> result = appDbContext.Events
+            List<ActionFrequencyPerUser> response = appDbContext.Events
                             .Where(x => x.EventType == EventType)
                             .GroupBy(x => x.User.UserId)
                             .Select(e => new ActionFrequencyPerUser(e.Key, e.Count()))
                             .ToList();
 
-            return result;
+            return response;
         }
 
     }
