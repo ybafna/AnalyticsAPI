@@ -11,5 +11,7 @@ namespace AnalyticsAPI.Models
         public EventType EventType { get; set; }
         public DateTime Timestamp { get; set; }
         public string EventData { get; set; }
+
+        public User User {get; set;}
     }
 }

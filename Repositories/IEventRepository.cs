@@ -7,7 +7,7 @@ namespace AnalyticsAPI.Repositories
 {
     public interface IEventRepository
     {
-        int AddEvent(Event Event);
+        Event AddEvent(Event Event, int UserId);
         MostFrequentActionResponse GetMostFrequentAction();
         List<ActionFrequencyPerUser> GetMostFrequentActionPerUser(EventType EventType);
 

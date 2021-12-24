@@ -15,14 +15,12 @@ namespace AnalyticsAPI.Services
     {
         private readonly IEventRepository eventRepository;
         private readonly IUserRepository userRepository;
-        private readonly IInteractionRepository interactionRepository;
         private readonly ILogger<EventService> logger;
-        public EventService(ILogger<EventService> logger, IEventRepository eventRepository, IUserRepository userRepository, IInteractionRepository interactionRepository)
+        public EventService(ILogger<EventService> logger, IEventRepository eventRepository, IUserRepository userRepository)
         {
             this.logger = logger;
             this.eventRepository = eventRepository;
             this.userRepository = userRepository;
-            this.interactionRepository = interactionRepository;
         }
 
         private User createUser(ActionRequest request){
@@ -73,7 +71,7 @@ namespace AnalyticsAPI.Services
             return response;
         }
 
-        public GenericResponse<UserEventInteraction> AddEventLog(ActionRequest request)
+        public GenericResponse<Event> AddEventLog(ActionRequest request)
         {
             try
             {
@@ -92,11 +90,9 @@ namespace AnalyticsAPI.Services
                     UserId = userRepository.AddUser(User);
                 }
                 
-                int EventId = eventRepository.AddEvent(createEvent(request));
-                UserEventInteraction interaction = interactionRepository.AddInteraction(UserId, EventId);
-                
-                GenericResponse<UserEventInteraction> response = new GenericResponse<UserEventInteraction>();
-                response.Data = interaction;
+                Event Event = eventRepository.AddEvent(createEvent(request), UserId);
+                GenericResponse<Event> response = new GenericResponse<Event>();
+                response.Data = Event;
                 return response;
             }
             catch (Exception e)
