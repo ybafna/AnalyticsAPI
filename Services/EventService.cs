@@ -60,7 +60,9 @@ namespace AnalyticsAPI.Services
                 else
                 {
                     logger.LogError("EventService :: No Data Available");
-                    throw new CustomException(ErrorMessages.ERROR_RETRIEVING_DATA);
+                    GenericErrorResponse errorResponse = new GenericErrorResponse();
+                    errorResponse.ErrorMessage = ErrorMessages.ERROR_NO_DATA;
+                    response.Error = errorResponse;
                 }
             }
             catch (Exception e)
@@ -71,7 +73,7 @@ namespace AnalyticsAPI.Services
             return response;
         }
 
-        public void AddEventLog(ActionRequest request)
+        public GenericResponse<UserEventInteraction> AddEventLog(ActionRequest request)
         {
             try
             {
@@ -80,6 +82,9 @@ namespace AnalyticsAPI.Services
                 if (UserId != 0)
                 {
                     User = userRepository.GetUser(UserId);
+                    if(User.UserName!=request.UserName){
+                        throw new CustomException();
+                    }
                 }
                 if (User == null)
                 {
@@ -88,7 +93,11 @@ namespace AnalyticsAPI.Services
                 }
                 
                 int EventId = eventRepository.AddEvent(createEvent(request));
-                interactionRepository.AddInteraction(UserId, EventId);
+                UserEventInteraction interaction = interactionRepository.AddInteraction(UserId, EventId);
+                
+                GenericResponse<UserEventInteraction> response = new GenericResponse<UserEventInteraction>();
+                response.Data = interaction;
+                return response;
             }
             catch (Exception e)
             {

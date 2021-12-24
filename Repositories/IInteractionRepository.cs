@@ -5,7 +5,7 @@ namespace AnalyticsAPI.Repositories
 {
     public interface IInteractionRepository
     {
-        void AddInteraction(int UserId, int EventId);
+        UserEventInteraction AddInteraction(int UserId, int EventId);
     }
 
 }

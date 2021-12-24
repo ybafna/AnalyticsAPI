@@ -47,7 +47,7 @@ namespace AnalyticsAPI.Controllers
 
         [HttpPost]
         [Consumes(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(GenericResponse<UserEventInteraction>))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(GenericResponse<Object>))]
         public IActionResult AddEventLog(ActionRequest request)
         {
@@ -55,12 +55,12 @@ namespace AnalyticsAPI.Controllers
                 return BadRequest();
             try
             {
-                eventService.AddEventLog(request);
-                return NoContent();
+                GenericResponse<UserEventInteraction> response = eventService.AddEventLog(request);
+                return StatusCode(StatusCodes.Status201Created, response);
             }
             catch (CustomException e)
             {
-                GenericResponse<ActionResponse> response = new GenericResponse<ActionResponse>();
+                GenericResponse<Object> response = new GenericResponse<Object>();
                 response.Error = GetErrorResponse(e.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, response);
             }

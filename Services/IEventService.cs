@@ -6,6 +6,6 @@ namespace AnalyticsAPI.Services
     public interface IEventService
     {
         GenericResponse<ActionResponse> GetMostFrequentAction();
-        void AddEventLog(ActionRequest request);
+        GenericResponse<UserEventInteraction> AddEventLog(ActionRequest request);
     }
 }
