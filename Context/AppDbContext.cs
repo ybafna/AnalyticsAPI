@@ -12,7 +12,10 @@ namespace AnalyticsAPI.Context
 
         }
 
+        // Stores User Entity
         public DbSet<User> Users { get; set; }
+
+        // Stores Event Entity
         public DbSet<Event> Events { get; set; }
     }
 }

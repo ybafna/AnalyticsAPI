@@ -49,13 +49,13 @@ namespace AnalyticsAPI.Controllers
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(GenericResponse<Event>))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(GenericResponse<Object>))]
-        public IActionResult AddEventLog(ActionRequest request)
+        public IActionResult AddEvent(ActionRequest request)
         {
             if (request == null)
                 return BadRequest();
             try
             {
-                GenericResponse<Event> response = eventService.AddEventLog(request);
+                GenericResponse<Event> response = eventService.AddEvent(request);
                 return StatusCode(StatusCodes.Status201Created, response);
             }
             catch (CustomException e)

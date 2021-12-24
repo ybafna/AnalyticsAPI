@@ -23,22 +23,29 @@ namespace AnalyticsAPI.Services
             this.userRepository = userRepository;
         }
 
-        private User createUser(ActionRequest request){
+        //Creates User Object
+        private User createUser(ActionRequest request)
+        {
             User User = new User();
-            if(request.UserId!=0){
+            if (request.UserId != 0)
+            {
                 User.UserId = request.UserId;
             }
             User.UserName = request.UserName;
             return User;
         }
 
-        private Event createEvent(ActionRequest request){
+        //Creates Event Object
+        private Event createEvent(ActionRequest request)
+        {
             Event Event = new Event();
             Event.EventType = request.EventType;
             Event.Timestamp = request.Timestamp;
             Event.EventData = request.EventData;
             return Event;
         }
+
+        // Returns the most frequent action and frequency of that action per user
         public GenericResponse<ActionResponse> GetMostFrequentAction()
         {
 
@@ -71,7 +78,8 @@ namespace AnalyticsAPI.Services
             return response;
         }
 
-        public GenericResponse<Event> AddEventLog(ActionRequest request)
+        // Adds a new event that user performed
+        public GenericResponse<Event> AddEvent(ActionRequest request)
         {
             try
             {
@@ -80,7 +88,8 @@ namespace AnalyticsAPI.Services
                 if (UserId != 0)
                 {
                     User = userRepository.GetUser(UserId);
-                    if(User.UserName!=request.UserName){
+                    if (User.UserName != request.UserName)
+                    {
                         throw new CustomException();
                     }
                 }
@@ -89,7 +98,7 @@ namespace AnalyticsAPI.Services
                     User = createUser(request);
                     UserId = userRepository.AddUser(User);
                 }
-                
+
                 Event Event = eventRepository.AddEvent(createEvent(request), UserId);
                 GenericResponse<Event> response = new GenericResponse<Event>();
                 response.Data = Event;
@@ -102,6 +111,6 @@ namespace AnalyticsAPI.Services
             }
         }
 
-        
+
     }
 }

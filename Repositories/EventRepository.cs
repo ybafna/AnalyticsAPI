@@ -17,6 +17,7 @@ namespace AnalyticsAPI.Repositories
             this.appDbContext = appDbContext;
         }
 
+        //Adds a new event to DB Context
         public Event AddEvent(Event Event, int UserId)
         {
             var User = appDbContext.Users.Find(UserId);
@@ -26,6 +27,7 @@ namespace AnalyticsAPI.Repositories
             return Event;
         }
 
+        // Finds the most frequent event among all users
         public MostFrequentActionResponse GetMostFrequentAction()
         {
             MostFrequentActionResponse response = appDbContext.Events.GroupBy(e => e.EventType)
@@ -36,6 +38,8 @@ namespace AnalyticsAPI.Repositories
 
             return response;
         }
+        
+        // Finds frequency of event for each user
         public List<ActionFrequencyPerUser> GetMostFrequentActionPerUser(EventType EventType)
         {
             List<ActionFrequencyPerUser> response = appDbContext.Events
