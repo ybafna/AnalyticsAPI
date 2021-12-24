@@ -10,7 +10,7 @@ namespace AnalyticsAPI.Models
     {
         public int MaxFrequency { get; set; }
         public EventType ActionWithMaxFrequency { get; set; }
-        public List<ActionFrequencyPerUser> frequencyPerUser { get; set; }
+        public List<ActionFrequencyPerUser> FrequencyPerUser { get; set; }
 
     }
 }

@@ -20,10 +20,10 @@ namespace AnalyticsAPI.Controllers
         private readonly IEventService eventService;
         private readonly ILogger<EventController> logger;
 
-        public EventController(IEventService _eventService, ILogger<EventController> _logger)
+        public EventController(IEventService eventService, ILogger<EventController> logger)
         {
-            eventService = _eventService;
-            logger = _logger;
+            this.eventService = eventService;
+            this.logger = logger;
         }
 
         [HttpGet]
@@ -66,12 +66,13 @@ namespace AnalyticsAPI.Controllers
             }
         }
 
-        private GenericErrorResponse GetErrorResponse(String errorMessage){
+        private GenericErrorResponse GetErrorResponse(String errorMessage)
+        {
             GenericErrorResponse errorResponse = new GenericErrorResponse();
             errorResponse.ErrorMessage = errorMessage;
             return errorResponse;
         }
     }
 
-    
+
 }
